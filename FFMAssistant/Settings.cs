@@ -21,6 +21,10 @@ namespace FFMAssistant
             this.getParams();
         }
 
+
+        /// <summary>
+        /// フォームの値を、設定データに反映
+        /// </summary>
         private void setParams()
         {
             this.settingsParams.ffmpegPath = FFmpegPath.Text;
@@ -30,6 +34,9 @@ namespace FFMAssistant
             this.settingsParams.extensionList = ExtensionList.Text;
         }
 
+        /// <summary>
+        /// 設定データの値を、フォームに反映
+        /// </summary>
         private void getParams()
         {
             FFmpegPath.Text = this.settingsParams.ffmpegPath;

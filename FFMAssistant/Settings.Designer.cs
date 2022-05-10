@@ -166,7 +166,7 @@
             this.DefaultOutput.Location = new System.Drawing.Point(133, 32);
             this.DefaultOutput.Name = "DefaultOutput";
             this.DefaultOutput.Size = new System.Drawing.Size(208, 23);
-            this.DefaultOutput.TabIndex = 1;
+            this.DefaultOutput.TabIndex = 2;
             // 
             // groupBox3
             // 
@@ -212,7 +212,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 90);
+            this.label4.Location = new System.Drawing.Point(3, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 15);
             this.label4.TabIndex = 0;
@@ -226,23 +226,23 @@
             this.VCodecList.Name = "VCodecList";
             this.VCodecList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.VCodecList.Size = new System.Drawing.Size(208, 59);
-            this.VCodecList.TabIndex = 1;
+            this.VCodecList.TabIndex = 3;
             // 
             // ACodecList
             // 
             this.ACodecList.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ACodecList.Location = new System.Drawing.Point(133, 68);
+            this.ACodecList.Location = new System.Drawing.Point(133, 69);
             this.ACodecList.Multiline = true;
             this.ACodecList.Name = "ACodecList";
             this.ACodecList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ACodecList.Size = new System.Drawing.Size(208, 59);
-            this.ACodecList.TabIndex = 1;
+            this.ACodecList.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 156);
+            this.label5.Location = new System.Drawing.Point(3, 157);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 0;
@@ -251,12 +251,12 @@
             // ExtensionList
             // 
             this.ExtensionList.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.ExtensionList.Location = new System.Drawing.Point(133, 134);
+            this.ExtensionList.Location = new System.Drawing.Point(133, 135);
             this.ExtensionList.Multiline = true;
             this.ExtensionList.Name = "ExtensionList";
             this.ExtensionList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ExtensionList.Size = new System.Drawing.Size(208, 59);
-            this.ExtensionList.TabIndex = 1;
+            this.ExtensionList.TabIndex = 5;
             // 
             // Settings
             // 

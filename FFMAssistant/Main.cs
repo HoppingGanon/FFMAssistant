@@ -5,8 +5,13 @@ using System.Text.Unicode;
 
 namespace FFMAssistant
 {
+    /// <summary>
+    /// メインとして表示するフォームのクラス
+    /// </summary>
     public partial class Main : Form
     {
+
+        // パラメータステートセーブを保存する相対パス
         const String paramsPath = "params\\";
         const String settingsFileName = "settings.json";
 
@@ -15,9 +20,21 @@ namespace FFMAssistant
         public SettingsParams settingsParams = new SettingsParams();
         public MainParams mainParams = new MainParams();
 
+        /// <summary>
+        /// フォームの初期化やダイアログの準備、設定値の読み込みを行う。
+        /// </summary>
         public Main()
         {
             InitializeComponent();
+
+            // 開発者名
+            this.developer.Text = "ほっぴんぐがのん";
+
+            // バージョンの記載
+            this.version.Text = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;
+
+            var asm = GetType().Assembly;
+            var ver = asm.GetName().Version;
 
             this.getParams();
             this.controlInput();
@@ -30,18 +47,21 @@ namespace FFMAssistant
             this.sdialog.Filter = "すべてのファイル(*.*)|*.*";
             this.sdialog.Title = "出力先を決定してください";
 
+            // 出力完了後の処理をリセット
+            this.EndProcess.SelectedIndex = 0;
+
             // 設定読み込み
             this.loadSettings();
             this.updateList();
 
-            // ステートリス読込み
+            // ステートリスト読込み
             this.loadStateList();
 
         }
 
         private void loadSettings()
         {
-            String jsonPath = Directory.GetCurrentDirectory() + "\\" + Main.settingsFileName;
+            String jsonPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.settingsFileName;
             if (File.Exists(jsonPath))
             {
                 StreamReader sr = new System.IO.StreamReader(jsonPath, System.Text.Encoding.UTF8);
@@ -78,7 +98,7 @@ namespace FFMAssistant
                 string jsonParams = JsonSerializer.Serialize<SettingsParams>(this.settingsParams, options);
 
                 // 保存場所の決定
-                string savePath = Directory.GetCurrentDirectory() + "\\" + Main.settingsFileName;
+                string savePath = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.settingsFileName;
 
                 // JSON保存
                 File.WriteAllText(savePath, jsonParams);
@@ -89,6 +109,9 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        /// 動画コーデック、音声コーデック、拡張子のリストを最新に更新する
+        /// </summary>
         private void updateList()
         {
             // リストのクリア
@@ -112,6 +135,9 @@ namespace FFMAssistant
 
         }
 
+        /// <summary>
+        /// メイン設定データの値を、フォームに反映
+        /// </summary>
         private void getParams()
         {
             IFile1.Text = mainParams.iFile1;
@@ -141,6 +167,9 @@ namespace FFMAssistant
             OFile.Text = mainParams.oFile;
         }
 
+        /// <summary>
+        /// フォームの値を、メイン設定データに反映
+        /// </summary>
         private void setParams()
         {
             mainParams.iFile1 = IFile1.Text;
@@ -170,6 +199,9 @@ namespace FFMAssistant
             mainParams.oFile = OFile.Text;
         }
 
+        /// <summary>
+        /// コントロールのEnableをあるべき状態に変更する(対象コントロールがChangeするたびに実行する)
+        /// </summary>
         private void controlInput () {
 
             switch (AdjustTime.SelectedIndex)
@@ -217,34 +249,63 @@ namespace FFMAssistant
 
         }
 
+        /// <summary>
+        /// 主要な設定値コントロールが変更されるたびに呼び出されるメソッド
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void controlInput(object sender, EventArgs e)
         {
             this.controlInput();
         }
 
+        /// <summary>
+        /// 閉じるボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// ステートセーブリストを読み込む
+        /// 対象フォルダに存在するjsonファイル名から拡張子jsonを除いたものを表示
+        /// </summary>
         private void loadStateList ()
         {
             // ステートリストのアイテムのクリア
             this.StateSave.Items.Clear();
             this.StateSave.Items.Add("[Default]");
 
-            string directory = Directory.GetCurrentDirectory() + "\\" + Main.paramsPath;
-            string[] files = Directory.GetFiles(directory);
-            foreach (string file in files)
+            try
             {
-                if (Path.GetExtension(file) == ".json")
+
+                string directory = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath;
+                string[] files = Directory.GetFiles(directory);
+                foreach (string file in files)
                 {
-                    // 拡張子を除いたファイル名を追加
-                    this.StateSave.Items.Add(Path.GetFileNameWithoutExtension(file));
+                    if (Path.GetExtension(file) == ".json")
+                    {
+                        // 拡張子を除いたファイル名を追加
+                        this.StateSave.Items.Add(Path.GetFileNameWithoutExtension(file));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "FFMAssistant エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// FFmpegコマンドを作成する
+        /// </summary>
+        /// <param name="isFrameInt">フレーム補間を含めるかどうか</param>
+        /// <param name="isBlur">モーションブラーを含めるかどうか</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         private FFMpegCommand getFFmpegCmd(Boolean isFrameInt, Boolean isBlur)
         {
             String ffmCmd = $"\"{this.settingsParams.ffmpegPath}\\ffmpeg.exe\"";
@@ -537,6 +598,104 @@ namespace FFMAssistant
             return rcode;
         }
 
+        /// <summary>
+        /// シャットダウン・スリープまたは休止状態を実行する
+        /// </summary>
+        /// <param name="isSleep">trueにするとスリープまたは休止状態へ移行</param>
+        private void shutdown (Boolean isSleep)
+        {
+            ProcessStartInfo psi;
+            if (isSleep)
+            {
+                // 休止状態・スリープ
+                psi = new ProcessStartInfo("rundll32.exe", "PowrProf.dll,SetSuspendState");
+            }
+            else
+            {
+                // シャットダウン
+                psi = new ProcessStartInfo("shutdown", "/s /t 60 /hybrid /c \"FFMAssistの出力完了後処理で自動シャットダウン\"");
+            }
+
+            try
+            {
+                // 終了プロセス
+                Process? process = Process.Start(psi);
+                if (process != null)
+                {
+                    process.WaitForExit();
+                    process.Close();
+                }
+                else
+                {
+                    throw new Exception("FFMpegのシャットダウン中にエラーが発生しました。");
+                }
+
+                // シャットダウンシーケンスの回避
+                if (isSleep)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show(this, "出力完了後の処理として、60秒後に自動的にシャットダウンを行います。\n「OK」を押すとシャットダウンを取り消します。", "FFMAssist 終了後処理", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                psi = new ProcessStartInfo("shutdown", "/a");
+                process = Process.Start(psi);
+                if (process != null)
+                {
+                    process.WaitForExit();
+                    process.Close();
+                }
+                else
+                {
+                    throw new Exception("FFMpegの出力完了後の処理回避中にエラーが発生しました。");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "FFMAssistant エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// ファイルを開く際に使用する汎用メソッド
+        /// </summary>
+        /// <returns></returns>
+        private String choseFile()
+        {
+            //ダイアログを表示する
+            if (this.fdialog.ShowDialog() == DialogResult.OK)
+            {
+                return this.fdialog.FileName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// ファイルを保存する際に使用する汎用メソッド
+        /// </summary>
+        /// <returns></returns>
+        private String saveFile()
+        {
+            //ダイアログを表示する
+            if (this.sdialog.ShowDialog() == DialogResult.OK)
+            {
+                return this.sdialog.FileName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// 出力ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OutputButton_Click(object sender, EventArgs e)
         {
             try
@@ -558,12 +717,35 @@ namespace FFMAssistant
                 {
                     throw new Exception("FFMpegのプロセス中にエラーが発生しました。");
                 }
+
+                // シャットダウン
+                switch (this.EndProcess.SelectedIndex)
+                {
+                    case 0:
+                        break;
+
+                    case 1:
+                        // 休止状態
+                        this.shutdown(true);
+                        break;
+
+                    case 2:
+                        // シャットダウン
+                        this.shutdown(false);
+                        break;
+                }
+
             } catch(Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "FFMAssistant エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        /// <summary>
+        /// プレビューボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             try
@@ -594,6 +776,11 @@ namespace FFMAssistant
 
         }
 
+        /// <summary>
+        /// 入力ファイル1 開くボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IFile1Open_Click(object sender, EventArgs e)
         {
             String path = this.choseFile();
@@ -603,6 +790,11 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        /// 入力ファイル2 開くボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IFile2Open_Click(object sender, EventArgs e)
         {
             String path = this.choseFile();
@@ -612,6 +804,11 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        /// 出力ファイル 開くボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OFileOpen_Click(object sender, EventArgs e)
         {
             String path = this.saveFile();
@@ -620,6 +817,11 @@ namespace FFMAssistant
                 OFile.Text = path;
             }
         }
+        /// <summary>
+        /// フィルター設定ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void FilterSettings_Click(object sender, EventArgs e)
         {
@@ -634,6 +836,11 @@ namespace FFMAssistant
             this.mainParams.bParams = filterSettings.bParams;
         }
 
+        /// <summary>
+        /// ステートセーブ 保存ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StateSaveButton_Click(object sender, EventArgs e)
         {
             try
@@ -658,10 +865,10 @@ namespace FFMAssistant
                 string jsonParams = JsonSerializer.Serialize<MainParams>(this.mainParams, options);
 
                 // 保存場所の決定
-                string savePath = Directory.GetCurrentDirectory() + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
-                if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\" + Main.paramsPath))
+                string savePath = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
+                if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath))
                 {
-                    Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\" + Main.paramsPath);
+                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath);
                 }
 
                 // JSON保存
@@ -677,11 +884,16 @@ namespace FFMAssistant
 
         }
 
+        /// <summary>
+        /// ステートセーブ 呼出ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StateCallButton_Click(object sender, EventArgs e)
         {
             try
             {
-                string loadPath = Directory.GetCurrentDirectory() + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
+                string loadPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
                 if (this.StateSave.Text == "[Default]") {
                     this.mainParams = new MainParams();
                 }
@@ -713,11 +925,16 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        /// ステートセーブ 削除ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StateDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                string loadPath = Directory.GetCurrentDirectory() + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
+                string loadPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + Main.paramsPath + this.StateSave.Text + ".json";
                 if (this.StateSave.Text == "[Default]")
                 {
                     throw new Exception("'[Default]'は削除できません。");
@@ -742,6 +959,11 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        /// 設定ボタンを押したときに実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             // パラメータを渡す
@@ -761,41 +983,11 @@ namespace FFMAssistant
 
         }
 
-        private String choseFile()
-        {
-            //ダイアログを表示する
-            if (this.fdialog.ShowDialog() == DialogResult.OK)
-            {
-                return this.fdialog.FileName;
-            }
-            else
-            {
-                return "";
-            }
-        }
-        private String saveFile()
-        {
-            //ダイアログを表示する
-            if (this.sdialog.ShowDialog() == DialogResult.OK)
-            {
-                return this.sdialog.FileName;
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        private class FFMpegCommand
-        {
-            public string allCommand = "";
-            public string inputCommand = "";
-            public string outputCommand = "";
-            public string parent = "";
-            public string baseName = "";
-            public string extension = "";
-        }
-
+        /// <summary>
+        ///  開始時間の小数点部分からフォーカスが離れた時に実行する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Beginfff_Leave(object sender, EventArgs e)
         {
             try
@@ -813,6 +1005,11 @@ namespace FFMAssistant
             }
         }
 
+        /// <summary>
+        ///  終了時間の小数点部分からフォーカスが離れた時に実行する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Endfff_Leave(object sender, EventArgs e)
         {
             try
@@ -828,6 +1025,19 @@ namespace FFMAssistant
             {
 
             }
+        }
+
+        /// <summary>
+        /// FFmpegを実行するためのコマンドを保持する内部クラス
+        /// </summary>
+        private class FFMpegCommand
+        {
+            public string allCommand = "";
+            public string inputCommand = "";
+            public string outputCommand = "";
+            public string parent = "";
+            public string baseName = "";
+            public string extension = "";
         }
     }
 }

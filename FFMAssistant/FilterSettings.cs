@@ -15,6 +15,7 @@ namespace FFMAssistant
         public FrameIntParams fiParams = new FrameIntParams();
         public BlurParams bParams = new BlurParams();
 
+
         public FilterSettings()
         {
             InitializeComponent();
@@ -22,6 +23,11 @@ namespace FFMAssistant
             this.getBlur();
         }
 
+        /// <summary>
+        /// フィルター設定のデータを親画面から受け取り、初期化する
+        /// </summary>
+        /// <param name="fiParams"></param>
+        /// <param name="bParams"></param>
         public FilterSettings(FrameIntParams fiParams, BlurParams bParams)
         {
             InitializeComponent();
@@ -31,11 +37,18 @@ namespace FFMAssistant
             this.getBlur();
         }
 
+        /// <summary>
+        /// フレーム補間の設定値をすべて既定に戻す
+        /// </summary>
         private void resetFrameInterpolation() {
             this.fiParams = new FrameIntParams();
             this.getFrameInterpolation();
         }
 
+
+        /// <summary>
+        /// フォームの値を、フレーム補間設定データに反映
+        /// </summary>
         public void setFrameInterpolation()
         {
             fiParams.fps = fps.Text;
@@ -49,6 +62,10 @@ namespace FFMAssistant
             fiParams.scd = scd.SelectedIndex;
             fiParams.scd_threshold = scd_threshold.Text;
         }
+
+        /// <summary>
+        /// フレーム補間設定データを、フォームの値に反映
+        /// </summary>
         public void getFrameInterpolation()
         {
             fps.Text = fiParams.fps;
@@ -63,11 +80,18 @@ namespace FFMAssistant
             scd_threshold.Text = fiParams.scd_threshold;
         }
 
+        /// <summary>
+        /// モーションブラーの設定値をすべて既定に戻す
+        /// </summary>
         private void resetBlur()
         {
             this.bParams = new BlurParams();
             this.getBlur();
         }
+
+        /// <summary>
+        /// フォームの値を、モーションブラー設定データに反映
+        /// </summary>
         private void setBlur()
         {
             bParams.primaryA = PrimaryA.Text;
@@ -83,6 +107,10 @@ namespace FFMAssistant
             bParams.secondaryS = SecondaryS.Text;
             bParams.tertiaryS = TertiaryS.Text;
         }
+
+        /// <summary>
+        /// モーションブラー設定データを、フォームの値に反映
+        /// </summary>
         private void getBlur()
         {
             PrimaryA.Text = bParams.primaryA;

@@ -112,7 +112,7 @@
             this.FrameResetButton.Location = new System.Drawing.Point(175, 380);
             this.FrameResetButton.Name = "FrameResetButton";
             this.FrameResetButton.Size = new System.Drawing.Size(75, 23);
-            this.FrameResetButton.TabIndex = 2;
+            this.FrameResetButton.TabIndex = 11;
             this.FrameResetButton.Text = "リセット";
             this.FrameResetButton.UseVisualStyleBackColor = true;
             this.FrameResetButton.Click += new System.EventHandler(this.FrameResetButton_Click);
@@ -280,7 +280,7 @@
             this.mi_mode.Location = new System.Drawing.Point(138, 41);
             this.mi_mode.Name = "mi_mode";
             this.mi_mode.Size = new System.Drawing.Size(103, 23);
-            this.mi_mode.TabIndex = 1;
+            this.mi_mode.TabIndex = 2;
             this.mi_mode.MouseEnter += new System.EventHandler(this.mi_modeLabel_Enter);
             // 
             // mc_mode
@@ -294,7 +294,7 @@
             this.mc_mode.Location = new System.Drawing.Point(138, 76);
             this.mc_mode.Name = "mc_mode";
             this.mc_mode.Size = new System.Drawing.Size(103, 23);
-            this.mc_mode.TabIndex = 1;
+            this.mc_mode.TabIndex = 3;
             this.mc_mode.MouseEnter += new System.EventHandler(this.mc_modeLabel_Enter);
             // 
             // me_mode
@@ -308,7 +308,7 @@
             this.me_mode.Location = new System.Drawing.Point(138, 111);
             this.me_mode.Name = "me_mode";
             this.me_mode.Size = new System.Drawing.Size(103, 23);
-            this.me_mode.TabIndex = 1;
+            this.me_mode.TabIndex = 4;
             this.me_mode.MouseEnter += new System.EventHandler(this.me_modeLabel_Enter);
             // 
             // me
@@ -329,7 +329,7 @@
             this.me.Location = new System.Drawing.Point(138, 146);
             this.me.Name = "me";
             this.me.Size = new System.Drawing.Size(103, 23);
-            this.me.TabIndex = 1;
+            this.me.TabIndex = 5;
             this.me.MouseEnter += new System.EventHandler(this.meLabel_Enter);
             // 
             // scd
@@ -343,7 +343,7 @@
             this.scd.Location = new System.Drawing.Point(138, 286);
             this.scd.Name = "scd";
             this.scd.Size = new System.Drawing.Size(103, 23);
-            this.scd.TabIndex = 1;
+            this.scd.TabIndex = 9;
             this.scd.MouseEnter += new System.EventHandler(this.scdLabel_Enter);
             // 
             // fps
@@ -352,7 +352,7 @@
             this.fps.Location = new System.Drawing.Point(138, 6);
             this.fps.Name = "fps";
             this.fps.Size = new System.Drawing.Size(103, 23);
-            this.fps.TabIndex = 2;
+            this.fps.TabIndex = 1;
             this.fps.MouseEnter += new System.EventHandler(this.fpsLabel_Enter);
             // 
             // mb_size
@@ -361,7 +361,7 @@
             this.mb_size.Location = new System.Drawing.Point(138, 181);
             this.mb_size.Name = "mb_size";
             this.mb_size.Size = new System.Drawing.Size(103, 23);
-            this.mb_size.TabIndex = 2;
+            this.mb_size.TabIndex = 6;
             this.mb_size.MouseEnter += new System.EventHandler(this.mb_sizeLabel_Enter);
             // 
             // search_param
@@ -370,7 +370,7 @@
             this.search_param.Location = new System.Drawing.Point(138, 216);
             this.search_param.Name = "search_param";
             this.search_param.Size = new System.Drawing.Size(103, 23);
-            this.search_param.TabIndex = 2;
+            this.search_param.TabIndex = 7;
             this.search_param.MouseEnter += new System.EventHandler(this.search_paramLabel_Enter);
             // 
             // vsbmc
@@ -379,7 +379,7 @@
             this.vsbmc.Location = new System.Drawing.Point(138, 251);
             this.vsbmc.Name = "vsbmc";
             this.vsbmc.Size = new System.Drawing.Size(103, 23);
-            this.vsbmc.TabIndex = 2;
+            this.vsbmc.TabIndex = 8;
             this.vsbmc.MouseEnter += new System.EventHandler(this.vsbmcLabel_Enter);
             // 
             // scd_threshold
@@ -388,7 +388,7 @@
             this.scd_threshold.Location = new System.Drawing.Point(138, 323);
             this.scd_threshold.Name = "scd_threshold";
             this.scd_threshold.Size = new System.Drawing.Size(103, 23);
-            this.scd_threshold.TabIndex = 2;
+            this.scd_threshold.TabIndex = 10;
             this.scd_threshold.MouseEnter += new System.EventHandler(this.scd_thresholdLabel_Enter);
             // 
             // groupBox2
@@ -407,7 +407,7 @@
             this.BlurResetButton.Location = new System.Drawing.Point(175, 380);
             this.BlurResetButton.Name = "BlurResetButton";
             this.BlurResetButton.Size = new System.Drawing.Size(75, 23);
-            this.BlurResetButton.TabIndex = 2;
+            this.BlurResetButton.TabIndex = 24;
             this.BlurResetButton.Text = "リセット";
             this.BlurResetButton.UseVisualStyleBackColor = true;
             this.BlurResetButton.Click += new System.EventHandler(this.BlurResetButton_Click);
@@ -596,7 +596,7 @@
             this.PrimaryA.Location = new System.Drawing.Point(141, 3);
             this.PrimaryA.Name = "PrimaryA";
             this.PrimaryA.Size = new System.Drawing.Size(103, 23);
-            this.PrimaryA.TabIndex = 1;
+            this.PrimaryA.TabIndex = 12;
             this.PrimaryA.MouseEnter += new System.EventHandler(this.PrimaryALabel_Enter);
             // 
             // PrimaryB
@@ -604,7 +604,7 @@
             this.PrimaryB.Location = new System.Drawing.Point(141, 32);
             this.PrimaryB.Name = "PrimaryB";
             this.PrimaryB.Size = new System.Drawing.Size(103, 23);
-            this.PrimaryB.TabIndex = 1;
+            this.PrimaryB.TabIndex = 13;
             this.PrimaryB.MouseEnter += new System.EventHandler(this.PrimaryBLabel_Enter);
             // 
             // BlurMode
@@ -618,7 +618,7 @@
             this.BlurMode.Location = new System.Drawing.Point(141, 235);
             this.BlurMode.Name = "BlurMode";
             this.BlurMode.Size = new System.Drawing.Size(103, 23);
-            this.BlurMode.TabIndex = 1;
+            this.BlurMode.TabIndex = 20;
             this.BlurMode.MouseEnter += new System.EventHandler(this.BlurModeLabel_Enter);
             // 
             // SecondaryA
@@ -626,7 +626,7 @@
             this.SecondaryA.Location = new System.Drawing.Point(141, 61);
             this.SecondaryA.Name = "SecondaryA";
             this.SecondaryA.Size = new System.Drawing.Size(103, 23);
-            this.SecondaryA.TabIndex = 1;
+            this.SecondaryA.TabIndex = 14;
             this.SecondaryA.MouseEnter += new System.EventHandler(this.SecondaryALabel_Enter);
             // 
             // SecondaryB
@@ -634,7 +634,7 @@
             this.SecondaryB.Location = new System.Drawing.Point(141, 90);
             this.SecondaryB.Name = "SecondaryB";
             this.SecondaryB.Size = new System.Drawing.Size(103, 23);
-            this.SecondaryB.TabIndex = 1;
+            this.SecondaryB.TabIndex = 15;
             this.SecondaryB.MouseEnter += new System.EventHandler(this.SecondaryBLabel_Enter);
             // 
             // TertiaryA
@@ -642,7 +642,7 @@
             this.TertiaryA.Location = new System.Drawing.Point(141, 119);
             this.TertiaryA.Name = "TertiaryA";
             this.TertiaryA.Size = new System.Drawing.Size(103, 23);
-            this.TertiaryA.TabIndex = 1;
+            this.TertiaryA.TabIndex = 16;
             this.TertiaryA.MouseEnter += new System.EventHandler(this.TertiaryALabel_Enter);
             // 
             // TertiaryB
@@ -650,7 +650,7 @@
             this.TertiaryB.Location = new System.Drawing.Point(141, 148);
             this.TertiaryB.Name = "TertiaryB";
             this.TertiaryB.Size = new System.Drawing.Size(103, 23);
-            this.TertiaryB.TabIndex = 1;
+            this.TertiaryB.TabIndex = 17;
             this.TertiaryB.MouseEnter += new System.EventHandler(this.TertiaryBLabel_Enter);
             // 
             // BlurFrame
@@ -658,7 +658,7 @@
             this.BlurFrame.Location = new System.Drawing.Point(141, 177);
             this.BlurFrame.Name = "BlurFrame";
             this.BlurFrame.Size = new System.Drawing.Size(103, 23);
-            this.BlurFrame.TabIndex = 1;
+            this.BlurFrame.TabIndex = 18;
             this.BlurFrame.MouseEnter += new System.EventHandler(this.BlurFrameLabel_Enter);
             // 
             // BlurChannel
@@ -666,7 +666,7 @@
             this.BlurChannel.Location = new System.Drawing.Point(141, 206);
             this.BlurChannel.Name = "BlurChannel";
             this.BlurChannel.Size = new System.Drawing.Size(103, 23);
-            this.BlurChannel.TabIndex = 1;
+            this.BlurChannel.TabIndex = 19;
             this.BlurChannel.MouseEnter += new System.EventHandler(this.BlurChannelLabel_Enter);
             // 
             // PrimaryS
@@ -675,7 +675,7 @@
             this.PrimaryS.Location = new System.Drawing.Point(141, 264);
             this.PrimaryS.Name = "PrimaryS";
             this.PrimaryS.Size = new System.Drawing.Size(103, 23);
-            this.PrimaryS.TabIndex = 1;
+            this.PrimaryS.TabIndex = 21;
             this.PrimaryS.MouseEnter += new System.EventHandler(this.PrimarySLabel_Enter);
             // 
             // SecondaryS
@@ -684,7 +684,7 @@
             this.SecondaryS.Location = new System.Drawing.Point(141, 293);
             this.SecondaryS.Name = "SecondaryS";
             this.SecondaryS.Size = new System.Drawing.Size(103, 23);
-            this.SecondaryS.TabIndex = 1;
+            this.SecondaryS.TabIndex = 22;
             this.SecondaryS.MouseEnter += new System.EventHandler(this.SecondarySLabel_Enter);
             // 
             // TertiaryS
@@ -693,7 +693,7 @@
             this.TertiaryS.Location = new System.Drawing.Point(141, 322);
             this.TertiaryS.Name = "TertiaryS";
             this.TertiaryS.Size = new System.Drawing.Size(103, 23);
-            this.TertiaryS.TabIndex = 1;
+            this.TertiaryS.TabIndex = 23;
             this.TertiaryS.MouseEnter += new System.EventHandler(this.TertiarySLabel_Enter);
             // 
             // hint
@@ -704,7 +704,8 @@
             this.hint.Name = "hint";
             this.hint.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.hint.Size = new System.Drawing.Size(533, 200);
-            this.hint.TabIndex = 2;
+            this.hint.TabIndex = 0;
+            this.hint.TabStop = false;
             this.hint.Text = "ラベルをクリックすると、ここにヒントが表示されます。";
             // 
             // Quote
@@ -715,7 +716,8 @@
             this.Quote.Name = "Quote";
             this.Quote.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.Quote.Size = new System.Drawing.Size(533, 37);
-            this.Quote.TabIndex = 2;
+            this.Quote.TabIndex = 0;
+            this.Quote.TabStop = false;
             this.Quote.Text = "ラベルをクリックすると、ここにヒントが表示されます。";
             // 
             // FilterSettings

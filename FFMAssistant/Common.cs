@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FFMAssistant
 {
+    /// <summary>
+    /// 全体で使用する情報を持つクラス
+    /// </summary>
     public class Common
     {
         public const int YES = 0;
@@ -22,6 +25,9 @@ namespace FFMAssistant
         }
     }
 
+    /// <summary>
+    /// フレーム補間の設定情報
+    /// </summary>
     public class FrameIntParams
     {
         public String fps { get; set; } = "60";
@@ -36,6 +42,9 @@ namespace FFMAssistant
         public String scd_threshold { get; set; } = "5";
     }
 
+    /// <summary>
+    /// モーションブラーの設定情報
+    /// </summary>
     public class BlurParams
     {
         public String primaryA { get; set; } = "0.02";
@@ -52,6 +61,9 @@ namespace FFMAssistant
         public String tertiaryS { get; set; } = "32767";
     }
 
+    /// <summary>
+    /// メインの設定情報
+    /// </summary>
     public class MainParams
     {
         public String iFile1 { get; set; } = "";
@@ -80,6 +92,9 @@ namespace FFMAssistant
         public BlurParams bParams { get; set; } = new BlurParams();
     }
 
+    /// <summary>
+    /// システムの設定情報
+    /// </summary>
     public class SettingsParams
     {
         public String ffmpegPath { get; set; } = "C:\\Tools\\FFMPEG";

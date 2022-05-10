@@ -86,6 +86,9 @@
             this.StateCallButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.StateDelete = new System.Windows.Forms.Button();
+            this.version = new System.Windows.Forms.Label();
+            this.developer = new System.Windows.Forms.Label();
+            this.EndProcess = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -339,6 +342,7 @@
             // 
             resources.ApplyResources(this.Beginfff, "Beginfff");
             this.Beginfff.Name = "Beginfff";
+            this.Beginfff.TextChanged += new System.EventHandler(this.controlInput);
             this.Beginfff.Leave += new System.EventHandler(this.Beginfff_Leave);
             // 
             // flowLayoutPanel2
@@ -352,6 +356,7 @@
             // 
             resources.ApplyResources(this.Endfff, "Endfff");
             this.Endfff.Name = "Endfff";
+            this.Endfff.TextChanged += new System.EventHandler(this.controlInput);
             this.Endfff.Leave += new System.EventHandler(this.Endfff_Leave);
             // 
             // Option
@@ -455,6 +460,7 @@
             this.Extension.FormattingEnabled = true;
             resources.ApplyResources(this.Extension, "Extension");
             this.Extension.Name = "Extension";
+            this.Extension.SelectedIndexChanged += new System.EventHandler(this.controlInput);
             this.Extension.TextChanged += new System.EventHandler(this.controlInput);
             // 
             // FilterPreview
@@ -462,6 +468,7 @@
             resources.ApplyResources(this.FilterPreview, "FilterPreview");
             this.FilterPreview.Name = "FilterPreview";
             this.FilterPreview.UseVisualStyleBackColor = true;
+            this.FilterPreview.CheckedChanged += new System.EventHandler(this.controlInput);
             // 
             // StateSave
             // 
@@ -495,10 +502,35 @@
             this.StateDelete.UseVisualStyleBackColor = true;
             this.StateDelete.Click += new System.EventHandler(this.StateDelete_Click);
             // 
+            // version
+            // 
+            resources.ApplyResources(this.version, "version");
+            this.version.Name = "version";
+            // 
+            // developer
+            // 
+            resources.ApplyResources(this.developer, "developer");
+            this.developer.Name = "developer";
+            // 
+            // EndProcess
+            // 
+            this.EndProcess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.EndProcess.FormattingEnabled = true;
+            this.EndProcess.Items.AddRange(new object[] {
+            resources.GetString("EndProcess.Items"),
+            resources.GetString("EndProcess.Items1"),
+            resources.GetString("EndProcess.Items2")});
+            resources.ApplyResources(this.EndProcess, "EndProcess");
+            this.EndProcess.Name = "EndProcess";
+            this.EndProcess.SelectedIndexChanged += new System.EventHandler(this.controlInput);
+            this.EndProcess.TextChanged += new System.EventHandler(this.controlInput);
+            // 
             // Main
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.developer);
+            this.Controls.Add(this.version);
             this.Controls.Add(this.StateDelete);
             this.Controls.Add(this.StateCallButton);
             this.Controls.Add(this.StateSaveButton);
@@ -511,6 +543,7 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Extension);
+            this.Controls.Add(this.EndProcess);
             this.Controls.Add(this.OutputPlace);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SettingsButton);
@@ -600,5 +633,8 @@
         private TextBox Beginfff;
         private FlowLayoutPanel flowLayoutPanel2;
         private TextBox Endfff;
+        private Label version;
+        private Label developer;
+        private ComboBox EndProcess;
     }
 }
