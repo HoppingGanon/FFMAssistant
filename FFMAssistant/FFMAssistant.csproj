@@ -8,6 +8,27 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageIcon>ffma.png</PackageIcon>
     <ApplicationIcon>rsc\ffma.ico</ApplicationIcon>
+    <Version>0.8.0</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AssemblyVersion></AssemblyVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="rsc\ffma.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="rsc\ffma.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
